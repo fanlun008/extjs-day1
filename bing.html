@@ -1,0 +1,101 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>bing</title>
+  <link rel="stylesheet" type="text/css" href="./resources/css/ext-all.css" />
+  <script type="text/javascript" src="./adapter/ext/ext-base.js"></script>
+  <style>
+    .main-class {
+      /* position: relative;
+      left: 10px; */
+    }
+  </style>
+  <script type="text/javascript" src="./ext-all.js"></script>
+  <script type="text/javascript">
+    Ext.onReady(function () {
+
+      var tabPanel = new Ext.TabPanel({
+        width: 548,
+        height: 80,
+        plain: true,
+        border: false,
+        style: 'position: relative;top:-10px;',
+        items: [
+          {
+            itemId: 'international_item',
+            title: '国际版',
+            xtype: 'textfield',
+            width: 548,
+            height: 40,
+            style: 'width: 600px;font-size:24px'
+          },
+          {
+            itemId: 'domestic_item',
+            title: '国内版',
+            xtype: 'textfield',
+            width: 548,
+            height: 40,
+            style: 'width: 600px;font-size:24px'
+          },
+        ]
+      });
+      
+      tabPanel.activate(0);
+
+      var mainContainer = new Ext.Container({
+        renderTo: 'main-container',
+        // style: 'background-image:url(./img/bg.jpg);background-repeat: no-repeat;',
+        style: 'padding: 100',
+        layout: 'table',
+        layoutConfig: {
+          column: 3
+        },
+        items: [{
+            xtype: 'box',
+
+            height: 64,
+            style: 'margin-left: 20px;margin-right:20px;',
+            autoEl: {
+              tag: 'img',
+              src: './img/bingico.png'
+            }
+          },
+          tabPanel,
+          {
+            xtype: 'box',
+            id: 'searchBtn',
+            style: 'left: -35px;top: 4px;position: relative;',
+            height: 25,
+            autoEl: {
+              tag: 'img',
+              src: './img/search.png'
+            }
+          }
+        ]
+      })
+      Ext.get('searchBtn').on('click', function () {
+        console.log(tabPanel.activeTab.itemId);
+        var itemId = tabPanel.activeTab.itemId;
+        if (itemId == 'domestic_item'){
+          Ext.Msg.alert('search', 'search in domestic_item');
+        } 
+        if (itemId === 'international_item') {
+          Ext.Msg.alert('search', 'search in international_item');
+        }
+        
+      })
+
+      Ext.fly('ext-gen12').remove();
+
+    })
+  </script>
+</head>
+
+<!-- style="background-image: url(./img/bg.jpg)" -->
+
+<body style="background-image: url(./img/bg.jpg)">
+  <div id="main-container"></div>
+</body>
+
+</html>
